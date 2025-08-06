@@ -121,7 +121,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',  # Aquí le decimos a Django que busque en 'static' en la raíz del proyecto
 ]
 
-API_URL = 'https://jsonplaceholder.typicode.com/posts'
+API_URL = 'https://pperdomo.pythonanywhere.com/landing/api/index/?format=json'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
