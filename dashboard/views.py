@@ -13,7 +13,7 @@ def index(request):
     data = {
         'title': "Dashboard",
         'total_responses': total_responses,
-        
+        'posts': posts,  # Enviar los posts al template
     }
 
     return render(request, 'dashboard/index.html', data)
