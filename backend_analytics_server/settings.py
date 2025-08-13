@@ -24,8 +24,15 @@ SECRET_KEY = "django-insecure-a(4%=74ct+@bcs+4!e3o7#+!8kr$^=(+7$z41*l+fg-v^9e%fu
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CSRF_TRUSTED_ORIGINS = [
+  "https://*.app.github.dev", # Solo si utiliza Codespaces
+  "https://localhost:8000",
+  "http://127.0.0.1:8000"
+]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+  "*",
+]
 
 
 # Application definition
@@ -51,6 +58,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "backend_analytics_server.urls"
+
+# Fallo: acceso sin autenticación
+LOGIN_URL = '/login/'
+
+# Éxito: luego de autenticación exitosa
+LOGIN_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {
