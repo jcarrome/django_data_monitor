@@ -69,7 +69,7 @@ def index(request):
         'newest_product': newest_product,
         'products_table': products_table,
         'timeline_data': timeline_data,
-
+        'posts': posts,
     }
 
     return render(request, 'dashboard/index.html', data)
