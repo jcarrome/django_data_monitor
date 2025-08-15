@@ -11,7 +11,7 @@
     <!-- Indicadores -->
     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
 
-      <!-- Indicador -->
+      <!-- Número total de productos -->
       <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -22,17 +22,15 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            Número total de respuestas
+            Número total de productos
           </p>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            <!-- START - valor del indicador 1 -->
-            {{ total_responses }}
-            <!-- END - valor del indicador 1 -->
+            {{ total_products }}
           </p>
         </div>
       </div>
 
-      <!-- Indicador -->
+      <!-- Producto más solicitado -->
       <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -43,19 +41,17 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            Producto mas solicitado
+            Producto más solicitado
           </p>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
 
-            <!-- START - valor del indicador 2 -->
-            Valor 2
-            <!-- END - valor del indicador 2 -->
+            {{ most_requested }}
 
           </p>
         </div>
       </div>
 
-      <!-- Indicador -->
+      <!-- Producto más nuevo -->
       <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -66,19 +62,17 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            Indicador 3
+            Producto más nuevo
           </p>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
 
-            <!-- START - valor del indicador 3 -->
-            Valor 3
-            <!-- END - valor del indicador 3 -->
+            {{ newest_product }}
 
           </p>
         </div>
       </div>
 
-      <!-- Indicador -->
+      <!-- Producto menos solicitado -->
       <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -89,13 +83,11 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            Indicador 4
+            Producto menos solicitado
           </p>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
 
-            <!-- START - valor del indicador 4 -->
-            Valor 4
-            <!-- END - valor del indicador 4 -->
+            {{ least_requested }}
 
           </p>
         </div>
@@ -113,37 +105,28 @@
             <thead>
               <tr
                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                <th class="px-4 py-3">Columna 1</th>
-                <th class="px-4 py-3">Columna 2</th>
+                <th class="px-4 py-3">Producto</th>
+                <th class="px-4 py-3">Cantidad</th>
               </tr>
             </thead>
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-
-              <!-- START - respuestas -->
+              {% for prod in products_table %}
               <tr class="text-gray-700 dark:text-gray-400">
                 <td class="px-4 py-3 text-sm">
-                  <!-- START - fila.valor1 -->
-                  fila.valor1
-                  <!-- END - fila.valor1 -->
+                  {{ prod.name }}
                 </td>
                 <td class="px-4 py-3 text-sm">
-                  <!-- START - fila.valor2 -->
-                  fila.valor2
-                  <!-- END - fila.valor2 -->
+                  {{ prod.count }}
                 </td>
               </tr>
-              <!-- END - respuestas -->
-
+              {% endfor %}
             </tbody>
           </table>
         </div>
         <div
           class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
           <span class="flex items-center col-span-3">
-            <!-- START - # total de respuestas -->
-            XXX
-            <!-- END - # total de respuestas -->
-            respuestas
+            {{ total_responses }} respuestas
           </span>
         </div>
       </div>
@@ -153,7 +136,7 @@
       <div class="row-span-1 grid gap-6 mb-8 md:grid-cols-12">
         <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
           <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-            Título del gráfico
+            Cantidad de producto vs fecha
           </h4>
           <canvas id="line"></canvas>
         </div>
@@ -163,4 +146,38 @@
     </div>
 
   </div>
+  <!-- Puedes poner esto antes de cerrar </main> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Usamos products_table para la gráfica
+    const products = {{ products_table|safe }};
+    const labels = products.map(p => p.name);
+    const data = products.map(p => p.count);
+
+    const ctx = document.getElementById('line').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Cantidad por producto',
+          data: data,
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          x: {
+            title: { display: true, text: 'Producto' }
+          },
+          y: {
+            title: { display: true, text: 'Cantidad' },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
 </main>
